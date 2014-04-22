@@ -16,4 +16,4 @@ suite 'Counter', ->
     c = new Counter 'blog.example.com'
     c.start()
 
-    @clock.tick 65*1000
+    @clock.tick 15*1000
