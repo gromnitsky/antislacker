@@ -11,14 +11,13 @@ inject_script = (tabId, changeInfo, tab) ->
 
   print_info = (t) -> u.puts 0, 'bg', "changeInfo.status=#{changeInfo.status}: script injected #{t}"
 
-  for script in ['lib/content_script.js']
-    for domain of localStorage
-      if dz.Match domain, tab.url
-        chrome.tabs.executeScript tabId, {code: "domain = '#{domain}'"}
-        chrome.tabs.executeScript tabId, {file: script}, print_info(script)
-      else
-        u.puts 1, 'bg', "#{domain} not matched #{tab.url}"
-
+  for domain of localStorage
+    if dz.Match domain, tab.url
+      chrome.tabs.executeScript tabId, {code: "domain = '#{domain}'"}
+      chrome.tabs.executeScript tabId, {file: 'lib/content_script.js'},
+        print_info('lib/content_script.js')
+    else
+      u.puts 1, 'bg', "#{domain} not matched #{tab.url}"
 
 init_options()
 

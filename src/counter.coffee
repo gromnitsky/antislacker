@@ -33,9 +33,14 @@ class Counter
     val.elapsed >= val.limit
 
   tmpError: (val) ->
-    if val.mutex && val.mutex != @id
-      @log 1, "locked by #{val.mutex}"
-      return true
+    if val.mutex
+      mutex = val.mutex.split '/'
+      return false if mutex[0] == @id
+
+      if (Date.now()-mutex[1]) < Counter.TIMEOUT()*2
+        @log 1, "locked by #{val.mutex}"
+        return true
+
     false
 
   nextStep: (ref, func) ->
@@ -59,7 +64,7 @@ class Counter
         if ref.lastupdatedFlag
           val.lastupdated = Date.now()
           ref.lastupdatedFlag = false
-        val.mutex = ref.id      # lock by current instance
+        val.mutex = "#{ref.id}/#{Date.now()}" # lock by current instance
 
         ref._lastIterCache = val
         ref.db.save val, (ok) ->
@@ -72,10 +77,6 @@ class Counter
 
   abort: ->
     clearTimeout @timer
-    @db.get (val) =>
-      if val
-        val.mutex = null if val.mutex == @id # unlock
-        @db.save val
     @log 1, "aborted"
 
 module.exports = Counter
