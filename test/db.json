@@ -1,0 +1,23 @@
+{
+	"blog.example.com": {
+		"enabled": true,
+		"limit": 15,
+		"elapsed": 0,
+		"lastupdated": 0,
+		"mutex": null
+	},
+	"facebook.com": {
+		"enabled": false,
+		"limit": 120,
+		"elapsed": 5,
+		"lastupdated": 1398113520706,
+		"mutex": null
+	},
+	"livejournal.com": {
+		"enabled": true,
+		"limit": 180,
+		"elapsed": 100,
+		"lastupdated": 1397002420706,
+		"mutex": null
+	}
+}

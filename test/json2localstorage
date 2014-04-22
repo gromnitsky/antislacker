@@ -1,0 +1,16 @@
+#!/usr/bin/env coffee
+
+fs = require 'fs'
+path = require 'path'
+
+usage = ->
+  console.error "#{path.basename process.argv[1]}:", 'input output'
+  process.exit 1
+
+usage() if process.argv.length != 4
+
+input = JSON.parse fs.readFileSync process.argv[2]
+output = {}
+output[key] = JSON.stringify val for key,val of input
+
+fs.writeFileSync process.argv[3], JSON.stringify output

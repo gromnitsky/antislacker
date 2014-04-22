@@ -12,8 +12,12 @@ OPTS :=
 
 all: test
 
-test: compile
-	$(MOCHA) --compilers coffee:coffee-script -u tdd test $(OPTS)
+test_compile:
+	$(MAKE) -C test
+
+test: compile test_compile
+	$(MOCHA) --compilers coffee:coffee-script/register \
+		-u tdd test/test_*.coffee $(OPTS)
 
 compile: node_modules manifest.json
 	$(MAKE) -C src compile
@@ -33,7 +37,10 @@ manifest.json: manifest.m4 $(METADATA)
 manifest_clean:
 	rm -f manifest.json
 
-clean: manifest_clean compile_clean chrome_clean
+test_clean:
+	$(MAKE) -C test clean
+
+clean: manifest_clean compile_clean chrome_clean test_clean
 	[ -r lib ] && rmdir lib; :
 
 clobber: clean

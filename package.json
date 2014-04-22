@@ -14,8 +14,11 @@
 		"url": "http://github.com/gromnitsky/antislacker"
 	},
 	"dependencies": {
-		"coffee-script": "~1.6.2",
-		"browserify": "~2.6.0",
-		"mocha": "~1.8.2"
+		"coffee-script": "^1.7.1",
+		"browserify": "^3.44.0",
+		"mocha": "^1.18.2",
+		"sinon": "^1.9.1",
+		"dom-storage": "^2.0.1",
+		"q": "^1.0.1"
 	}
 }
