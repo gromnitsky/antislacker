@@ -70,7 +70,7 @@ class Counter
     clearTimeout @timer
     @db.get (val) =>
       if val
-        val.mutex = null        # unlock
+        val.mutex = null if val.mutex == @id # unlock
         @db.save val
     @log 1, "aborted"
 
