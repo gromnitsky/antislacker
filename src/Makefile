@@ -1,17 +1,23 @@
+where_am_i = $(lastword $(MAKEFILE_LIST))
+MK_LOCATION := $(realpath $(call where_am_i))
+MK_DIR := $(dir $(MK_LOCATION))
+
+include $(MK_DIR)/../mk/debug.mk
+
+JSON2LOCALSTORAGE := $(MK_DIR)/../test/json2localstorage
 BROWSERIFY := ../node_modules/.bin/browserify
 COFFEE := ../node_modules/.bin/coffee
 
 out := ../lib
 html := $(wildcard *.html)
 out_html := $(patsubst %.html,$(out)/%.html,$(html))
+out_localstorage := $(patsubst %.json,$(out)/%.localstorage,$(wildcard *.json))
 
 # compiled & bundled this will go to $(out)
 coffee := background.coffee
 
 out_js := $(patsubst %.coffee,$(out)/%.js,$(coffee))
 temp_js := $(patsubst %.coffee,%.js,$(wildcard *.coffee))
-
-.PHONY: compile clean
 
 all: compile
 
@@ -27,12 +33,12 @@ $(out)/%.js: %.js
 $(out)/%.html: %.html
 	cp $< $@
 
-compile: $(temp_js) $(out_js) $(out_html)
+$(out)/%.localstorage: %.json
+	$(JSON2LOCALSTORAGE) $< $@
 
+.PHONY: compile
+compile: $(temp_js) $(out_js) $(out_html) $(out_localstorage)
+
+.PHONY: clean
 clean:
-	rm -f $(out_js) $(temp_js) $(out_html)
-
-# Debug. Use 'gmake p-obj' to print $(obj) variable.
-p-%:
-	@echo $* = $($*)
-	@echo $*\'s origin is $(origin $*)
+	rm -f $(out_js) $(temp_js) $(out_html) $(out_localstorage)

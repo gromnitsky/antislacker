@@ -1,3 +1,5 @@
+include mk/debug.mk
+
 M4 := m4
 JSON := json
 MOCHA := node_modules/.bin/mocha
@@ -22,7 +24,7 @@ test: compile test_compile
 compile: node_modules manifest.json
 	$(MAKE) -C src compile
 
-include chrome.mk
+include mk/chrome.mk
 
 compile_clean:
 	$(MAKE) -C src clean
@@ -45,8 +47,3 @@ clean: manifest_clean compile_clean chrome_clean test_clean
 
 clobber: clean
 	rm -rf node_modules
-
-# Debug. Use 'gmake p-obj' to print $(obj) variable.
-p-%:
-	@echo $* = $($*)
-	@echo $*\'s origin is $(origin $*)
