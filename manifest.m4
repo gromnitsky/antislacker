@@ -6,5 +6,13 @@
 
 	"background": {
 		"scripts": ["lib/background.js"]
-	}
+	},
+	"web_accessible_resources": [
+		"lib/message.html"
+	],
+
+	"permissions": [
+    	"tabs",
+		"<all_urls>"
+	]
 }

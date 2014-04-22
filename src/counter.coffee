@@ -11,6 +11,8 @@ class Counter
     Counter.STEP*1000
 
   constructor: (@domain) ->
+    throw new Error 'domain is required' unless @domain
+
     @id = u.randstr()
     @db = new DB @domain
     @timer = null
@@ -38,6 +40,8 @@ class Counter
 
   nextStep: (ref, func) ->
     ref.db.get (val) ->
+      throw new Error("#{ref.id} got null from db.get()") unless val
+
       if ref.finished val
         val.mutex = null        # unlock
         ref.db.save val         # async, but we just hope for the best
