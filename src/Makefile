@@ -14,7 +14,7 @@ out_html := $(patsubst %.html,$(out)/%.html,$(html))
 out_localstorage := $(patsubst %.json,$(out)/%.localstorage,$(wildcard *.json))
 
 # compiled & bundled this will go to $(out)
-coffee := background.coffee
+coffee := background.coffee content_script.coffee
 
 out_js := $(patsubst %.coffee,$(out)/%.js,$(coffee))
 temp_js := $(patsubst %.coffee,%.js,$(wildcard *.coffee))
@@ -25,6 +25,12 @@ all: compile
 
 %.js: %.coffee
 	$(COFFEE) -c $<
+
+.PHONY: depend
+depend: $(temp_js)
+	make-commonjs-depend *js -o js.mk
+
+-include js.mk
 
 $(out)/%.js: %.js
 	@mkdir -p `dirname $@`
@@ -41,4 +47,4 @@ compile: $(temp_js) $(out_js) $(out_html) $(out_localstorage)
 
 .PHONY: clean
 clean:
-	rm -f $(out_js) $(temp_js) $(out_html) $(out_localstorage)
+	rm -f $(out_js) $(temp_js) $(out_html) $(out_localstorage) js.mk

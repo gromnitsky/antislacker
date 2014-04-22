@@ -10,7 +10,7 @@ PKG_FILES := $(shell $(JSON) files < $(METADATA) | $(JSON) -a)
 
 OPTS :=
 
-.PHONY: clobber clean manifest_clean compile_clean
+.PHONY: clobber clean manifest_clean compile_clean test_clean compile depend
 
 all: test
 
@@ -23,6 +23,9 @@ test: compile test_compile
 
 compile: node_modules manifest.json
 	$(MAKE) -C src compile
+
+depend:
+	$(MAKE) -C src depend
 
 include mk/chrome.mk
 

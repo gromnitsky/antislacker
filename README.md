@@ -7,6 +7,7 @@ TODO: write a description
 ## Build requirements:
 
 * jsontool in global mode.
+* make-commonjs-depend in global mode.
 * GNU m4
 * xxd utility.
 * GNU make.
@@ -15,6 +16,7 @@ TODO: write a description
 
 To compile, run
 
+	$ make depend
     $ make compile
 
 To make a .crx file, you'll need a private RSA key named `private.pem`
