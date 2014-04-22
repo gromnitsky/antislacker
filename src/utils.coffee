@@ -18,3 +18,16 @@ exports.uuid = ->
 
 exports.randstr = ->
   Math.random().toString(36).substring(2)
+
+# Return a string or null on error.
+exports.readFile = (file) ->
+  content = null
+  fp = new XMLHttpRequest()
+  try
+    fp.open "GET", file, false
+    fp.send null
+    content = fp.responseText
+  catch e
+    exports.puts 0, 'readFile', 'cannot load %s: %s', file, e
+
+  content

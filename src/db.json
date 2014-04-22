@@ -1,0 +1,16 @@
+{
+	"blog.example.com": {
+		"enabled": true,
+		"limit": 15,
+		"elapsed": 0,
+		"lastupdated": 0,
+		"mutex": null
+	},
+	"localhost": {
+		"enabled": true,
+		"limit": 15,
+		"elapsed": 0,
+		"lastupdated": 0,
+		"mutex": null
+	}
+}
