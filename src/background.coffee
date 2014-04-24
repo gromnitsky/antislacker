@@ -2,10 +2,6 @@ u = require './utils'
 
 dz = require './domainzone'
 
-init_options = ->
-  raw = u.readFile 'lib/db.localstorage'
-  localStorage.setItem key, val for key,val of JSON.parse raw
-
 inject_script = (tabId, changeInfo, tab) ->
   return unless changeInfo.status == 'complete'
 
@@ -19,7 +15,7 @@ inject_script = (tabId, changeInfo, tab) ->
     else
       u.puts 1, 'bg', "#{domain} not matched #{tab.url}"
 
-init_options()
+u.load_default_options 'lib/db.localstorage'
 
 # listen for any changes to the url of any tab
 chrome.tabs.onUpdated.addListener inject_script

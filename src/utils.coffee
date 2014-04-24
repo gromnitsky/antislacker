@@ -31,3 +31,11 @@ exports.readFile = (file) ->
     exports.puts 0, 'readFile', 'cannot load %s: %s', file, e
 
   content
+
+exports.load_default_options = (file) ->
+  raw = exports.readFile file
+  return false unless raw
+
+  localStorage.clear()
+  localStorage.setItem key, val for key,val of JSON.parse raw
+  true
