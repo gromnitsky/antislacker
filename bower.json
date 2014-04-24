@@ -1,0 +1,7 @@
+{
+	"name": "antislacker",
+	"private": true,
+	"dependencies": {
+		"angular": "~1.2.17"
+	}
+}

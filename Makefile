@@ -14,6 +14,9 @@ OPTS :=
 
 all: test
 
+include mk/chrome.mk
+include mk/bower.mk
+
 test_compile:
 	$(MAKE) -C test
 
@@ -21,13 +24,15 @@ test: compile test_compile
 	$(MOCHA) --compilers coffee:coffee-script/register \
 		-u tdd test/test_*.coffee $(OPTS)
 
-compile: node_modules manifest.json
+compile: node_modules bower_components manifest.json bower.copy
 	$(MAKE) -C src compile
 
 depend:
 	$(MAKE) -C src depend
 
-include mk/chrome.mk
+bower_components: bower.json
+	bower install
+	touch $@
 
 compile_clean:
 	$(MAKE) -C src clean
@@ -45,8 +50,8 @@ manifest_clean:
 test_clean:
 	$(MAKE) -C test clean
 
-clean: manifest_clean compile_clean chrome_clean test_clean
+clean: manifest_clean compile_clean chrome_clean test_clean bower.clean
 	[ -r lib ] && rmdir lib; :
 
 clobber: clean
-	rm -rf node_modules
+	rm -rf node_modules bower_components

@@ -6,3 +6,4 @@ npm-debug.log
 *.zip
 *.crx
 private.pem
+bower_components
