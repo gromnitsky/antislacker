@@ -32,10 +32,15 @@ exports.readFile = (file) ->
 
   content
 
-exports.load_default_options = (file) ->
+exports.load_default_options = (file, clear_old = false) ->
   raw = exports.readFile file
   return false unless raw
 
-  localStorage.clear()
-  localStorage.setItem key, val for key,val of JSON.parse raw
+  localStorage.clear() if clear_old
+  return true if localStorage.length != 0
+
+  for key,val of JSON.parse(raw)
+    if clear_old || !localStorage.getItem(key)
+      localStorage.setItem key, val
+
   true

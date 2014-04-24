@@ -13,7 +13,7 @@ inject_script = (tabId, changeInfo, tab) ->
       chrome.tabs.executeScript tabId, {file: 'lib/content_script.js'},
         print_info('lib/content_script.js')
     else
-      u.puts 1, 'bg', "#{domain} not matched #{tab.url}"
+      u.puts 2, 'bg', "#{domain} not matched #{tab.url}"
 
 u.load_default_options 'lib/db.localstorage'
 
