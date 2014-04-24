@@ -71,4 +71,5 @@ optionsApp.controller 'DomainCtrl', ($scope) ->
     idx.elapsed = 0 for idx in $scope.domains
 
   $scope.hard_reset = ->
-    $scope.domains = ls_get() if u.load_default_options 'db.localstorage'
+    return unless confirm 'Are you sure?'
+    $scope.domains = ls_get() if u.load_default_options 'db.localstorage', true
