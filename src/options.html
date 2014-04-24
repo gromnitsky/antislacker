@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="optionsApp">
+  <head>
+	<title>AntiSlacker Options</title>
+	<script src="angular.js"></script> <!-- 1.2.17 -->
+	<script src="options.js"></script>
+
+	<style type="text/css">
+      .destroy { cursor: pointer; }
+	  #mybuttons { margin-top: 1em; }
+
+	  .myform input.ng-valid {
+	    background-color: white;
+	    color: black;
+	  }
+	  .myform input.ng-invalid {
+	    background-color: red;
+	    color: white;
+	  }
+	</style>
+  </head>
+
+  <body>
+
+	<section ng-controller="DomainCtrl">
+	  <form name='myform' class='myform'>
+	  <table>
+		<tbody>
+		  <tr>
+			<th></th>
+			<th></th>
+			<th>Domain</th>
+			<th>Limit (s)</th>
+			<th>Elapsed (s)</th>
+			<th><!-- error message --></th>
+		  </tr>
+		  <tr ng-repeat='idx in domains'>
+			<td class='destroy'>&empty;</td>
+			<td><input ng-model='idx.enabled' type='checkbox'></td>
+			<td><input ng-model='idx.domain' required></td>
+			<td><input ng-model='idx.limit' required type='number' min='0' max='28800''></td>
+			<td>{{idx.elapsed}}</td>
+			<td ng-show='!idx.domain || !idx.limit'>Invalid value(s)</td>
+			<br>
+		  </tr>
+		</tbody>
+	  </table>
+	  </form>
+
+	  <div id='mybuttons'>
+		<button>Add</button>
+		<button title="All counters">Reset</button>
+		<button title="To extension's defaults">Hard Reset</button>
+	  </div>
+	</section>
+
+	<section>
+	  <p>
+		If a domain match is successful, an icon in a corresponding
+		tab's omnibox will appear.
+	  </p>
+	</section>
+
+  </body>
+</html>

@@ -10,6 +10,7 @@
 	"web_accessible_resources": [
 		"lib/message.html"
 	],
+	"options_page": "lib/options.html",
 
 	"permissions": [
     	"tabs",

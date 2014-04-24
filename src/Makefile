@@ -14,7 +14,7 @@ out_html := $(patsubst %.html,$(out)/%.html,$(html))
 out_localstorage := $(patsubst %.json,$(out)/%.localstorage,$(wildcard *.json))
 
 # compiled & bundled this will go to $(out)
-coffee := background.coffee content_script.coffee
+coffee := background.coffee content_script.coffee options.coffee
 
 out_js := $(patsubst %.coffee,$(out)/%.js,$(coffee))
 temp_js := $(patsubst %.coffee,%.js,$(wildcard *.coffee))
