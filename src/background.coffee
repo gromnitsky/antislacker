@@ -5,7 +5,7 @@ dz = require './domainzone'
 inject_script = (tabId, changeInfo, tab) ->
   return unless changeInfo.status == 'complete'
 
-  print_info = (t) -> u.puts 0, 'bg', "changeInfo.status=#{changeInfo.status}: script injected #{t}"
+  print_info = (t) -> u.puts 2, 'bg', "changeInfo.status=#{changeInfo.status}: script injected #{t}"
 
   for domain of localStorage
     if dz.Match domain, tab.url
@@ -14,6 +14,23 @@ inject_script = (tabId, changeInfo, tab) ->
         print_info('lib/content_script.js')
     else
       u.puts 2, 'bg', "#{domain} not matched #{tab.url}"
+
+matching_tabs_count = (func) ->
+  chrome.tabs.query {}, (arr) ->
+    r = 0
+    for idx in arr
+      for domain of localStorage
+        r++ if dz.Match(domain, idx.url)
+
+    func?(r)
+
+matching_tabs_close = ->
+  chrome.tabs.query {}, (arr) ->
+    for idx in arr
+      for domain of localStorage
+        if dz.Match domain, idx.url
+          u.puts 1, 'bg', "closing #{idx.url}"
+          chrome.tabs.remove idx.id
 
 u.load_default_options 'lib/db.localstorage'
 
@@ -29,7 +46,14 @@ chrome.extension.onMessage.addListener (req, sender, sendRes) ->
     when 'data:save'
       localStorage.setItem req.key, JSON.stringify(req.val)
       sendRes {ok: true}
+    when 'tabs:count'
+      matching_tabs_count (n) ->
+        sendRes {count: n}
+    when 'tabs:close'
+      matching_tabs_close()
     else
       throw new Error("unknown message name: #{req.msg}")
+
+  true                          # keep this
 
 u.puts 0, 'bg', 'loaded'

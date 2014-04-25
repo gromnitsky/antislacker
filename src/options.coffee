@@ -32,6 +32,15 @@ ls_save = (arr) ->
     u.puts 1, 'ls_save', idx.domain
     localStorage.setItem idx.domain, JSON.stringify obj
 
+close_tabs = (disturb = true) ->
+  chrome.runtime.sendMessage {msg: "tabs:count"}, (res) ->
+    if res.count < 1
+      alert "No matching tabs found." if disturb
+      return
+
+    return unless confirm "Close #{res.count} matching tab(s)? Answer OK if unsure."
+    chrome.runtime.sendMessage {msg: "tabs:close"}
+
 optionsApp = angular.module 'optionsApp', []
 
 optionsApp.controller 'DomainCtrl', ($scope) ->
@@ -73,3 +82,8 @@ optionsApp.controller 'DomainCtrl', ($scope) ->
   $scope.hard_reset = ->
     return unless confirm 'Are you sure?'
     $scope.domains = ls_get() if u.load_default_options 'db.localstorage', true
+
+  $scope.close_matching_tabs = ->
+    close_tabs()
+
+close_tabs false
