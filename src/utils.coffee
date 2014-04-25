@@ -44,3 +44,18 @@ exports.load_default_options = (file, clear_old = false) ->
       localStorage.setItem key, val
 
   true
+
+exports.was_yesterday = (num) ->
+  date = new Date num
+  year = date.getFullYear()
+  month = date.getMonth()
+  day = date.getDate()
+
+  now = new Date()
+  cur_year = now.getFullYear()
+  cur_month = now.getMonth()
+  cur_day = now.getDay()
+
+#  console.log "#{year} #{month} #{day} vs. #{cur_year} #{cur_month} #{cur_day}"
+  return true if (year < cur_year) || (month < cur_month)
+  day < cur_day

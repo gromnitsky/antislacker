@@ -16,7 +16,6 @@ class Counter
     @id = u.randstr()
     @db = new DB @domain
     @timer = null
-    @lastupdatedFlag = true
     @_lastIterCache = {}         # for unit tests
 
   log: (level, msg) ->
@@ -26,9 +25,8 @@ class Counter
     @nextStep this, func
 
   finished: (val) ->
-    if (Date.now() - val.lastupdated) >= Counter.DAY
+    if u.was_yesterday val.lastupdated
       val.elapsed = 0
-      @lastupdatedFlag = true
       @log 1, 'long time no see'
     val.elapsed >= val.limit
 
@@ -63,9 +61,7 @@ class Counter
         func? 'TMPERROR', ref
       else
         val.elapsed += Counter.STEP
-        if ref.lastupdatedFlag
-          val.lastupdated = Date.now()
-          ref.lastupdatedFlag = false
+        val.lastupdated = Date.now()
         val.mutex = "#{ref.id}/#{Date.now()}" # lock by current instance
 
         ref._lastIterCache = val
