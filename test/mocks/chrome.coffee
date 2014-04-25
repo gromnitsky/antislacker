@@ -2,9 +2,15 @@ Storage = require 'dom-storage'
 Storage.prototype.___save___ = ->
   # do nothing
 
-localStorage = new Storage "#{__dirname}/../db.localstorage", { strict: true }
+reset_localStorage = ->
+  new Storage "#{__dirname}/../db.localstorage", { strict: true }
+
+localStorage = reset_localStorage()
 
 chrome = {
+  _reset_localStorage: ->
+    localStorage = reset_localStorage()
+
   runtime: {
     lastError: 'something happend'
     sendMessage: (json, func) ->
