@@ -33,6 +33,8 @@ class Counter
     val.elapsed >= val.limit
 
   tmpError: (val) ->
+    return true unless val.enabled
+
     if val.mutex
       mutex = val.mutex.split '/'
       return false if mutex[0] == @id

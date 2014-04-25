@@ -8,7 +8,7 @@
 	},
 	"facebook.com": {
 		"enabled": false,
-		"limit": 120,
+		"limit": 15,
 		"elapsed": 5,
 		"lastupdated": 1398113520706,
 		"mutex": null
