@@ -10,8 +10,9 @@ all: $(browserify_js)
 	$(COFFEE) -cp $< > $@
 
 %.browserify.js: %.tmp.js
+	ln -sf ../db.localstorage .
 	$(BROWSERIFY) $< -o $@
 
 .PHONY: clean
 clean:
-	rm -f $(tmp_js) $(browserify_js)
+	rm -f $(tmp_js) $(browserify_js) db.localstorage
