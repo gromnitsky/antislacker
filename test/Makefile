@@ -6,7 +6,12 @@ include $(MK_DIR)/../mk/debug.mk
 
 localstorage := $(patsubst %.json,%.localstorage,$(wildcard *.json))
 
-all: $(localstorage)
+all: $(localstorage) browser
+
+.PHONY: browser
+browser:
+	$(MAKE) -C browser
+
 
 %.localstorage: %.json
 	./json2localstorage $< $@
@@ -14,3 +19,4 @@ all: $(localstorage)
 .PHONY: clean
 clean:
 	rm -f $(localstorage)
+	$(MAKE) -C browser clean

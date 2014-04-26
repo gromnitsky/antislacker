@@ -1,6 +1,6 @@
 # antislacker
 
-Chrome 25+ extension.
+Chrome 33+ extension.
 
 TODO: write a description
 
@@ -31,6 +31,19 @@ and run:
 
 If everything was fine, `antislacker-x.y.z.crx` file will
 appear.
+
+## Test
+
+There are 2 kinds of separate tests: those who run in node & in
+browser. For the 1st one just type:
+
+	$ make
+
+For the 2nd you'll need an http server. For example:
+
+	$ python -m SimpleHTTPServer
+
+& go to http://localhost:8000/test/browser/options.html
 
 ## License
 
