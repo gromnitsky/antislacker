@@ -55,14 +55,19 @@ optionsApp.controller 'DomainCtrl', ($scope) ->
     ls_save $scope.domains
   , true
 
-  $scope.rm = (domain) ->
-    return unless domain
+  $scope.rm = (domain_name) ->
+    return unless domain_name
     if $scope.domains.length == 1
       alert 'Nah.'
       return
 
-    return if (s = $scope.domains.indexOf(domain)) == -1
-    $scope.domains.splice s, 1
+    s = -1
+    for val,index in $scope.domains
+      if val.domain == domain_name
+        s = index
+        break
+
+    $scope.domains.splice s, 1 if s != -1
 
   $scope.add = ->
     return unless $scope.myform.$valid

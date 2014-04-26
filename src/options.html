@@ -35,7 +35,7 @@
 			<th><!-- error message --></th>
 		  </tr>
 		  <tr ng-repeat='idx in domains track by idx.domain'>
-			<td ng-click='rm(idx)' class='destroy'>&empty;</td>
+			<td ng-click='rm(idx.domain)' class='destroy'>&empty;</td>
 			<td><input ng-model='idx.enabled'
 					   type='checkbox'></td>
 			<td><input ng-model='idx.domain'
