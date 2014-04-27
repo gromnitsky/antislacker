@@ -1,10 +1,6 @@
-where_am_i = $(lastword $(MAKEFILE_LIST))
-MK_LOCATION := $(realpath $(call where_am_i))
-MK_DIR := $(dir $(MK_LOCATION))
+include ../mk/debug.mk
 
-include $(MK_DIR)/../mk/debug.mk
-
-JSON2LOCALSTORAGE := $(MK_DIR)/../test/json2localstorage
+JSON2LOCALSTORAGE := ../test/json2localstorage
 BROWSERIFY := ../node_modules/.bin/browserify
 COFFEE := ../node_modules/.bin/coffee
 
@@ -14,14 +10,14 @@ out_html := $(patsubst %.html,$(out)/%.html,$(html))
 out_localstorage := $(patsubst %.json,$(out)/%.localstorage,$(wildcard *.json))
 
 # compiled & bundled this will go to $(out)
-coffee := background.coffee content_script.coffee options.coffee
+coffee := background.coffee \
+	content_script.coffee \
+	options.coffee
 
 out_js := $(patsubst %.coffee,$(out)/%.js,$(coffee))
 temp_js := $(patsubst %.coffee,%.js,$(wildcard *.coffee))
 
 all: compile
-
-#$(out)/background.js: foo.js
 
 %.js: %.coffee
 	$(COFFEE) -c $<

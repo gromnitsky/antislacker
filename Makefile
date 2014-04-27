@@ -29,6 +29,7 @@ compile: node_modules bower_components manifest.json bower.copy
 
 depend:
 	$(MAKE) -C src depend
+	$(MAKE) -C test/browser depend
 
 bower_components: bower.json
 	bower install
@@ -55,3 +56,7 @@ clean: manifest_clean compile_clean chrome_clean test_clean bower.clean
 
 clobber: clean
 	rm -rf node_modules bower_components
+
+.PHONY: http
+http:
+	python -m SimpleHTTPServer || :
