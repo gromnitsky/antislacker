@@ -1,6 +1,14 @@
 {
 	"files": [
+		"icons/128.png",
+		"icons/19.png",
+		"lib/angular.js",
 		"lib/background.js",
+		"lib/content_script.js",
+		"lib/db.localstorage",
+		"lib/message.html",
+		"lib/options.html",
+		"lib/options.js",
 		"manifest.json"
 	],
 	"name": "antislacker",
