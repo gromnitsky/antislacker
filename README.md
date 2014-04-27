@@ -2,12 +2,32 @@
 
 Chrome 33+ extension.
 
-TODO: write a description
+Antiprocrastinator. Blocks domains after a time limit until the next
+day.
+
+## How It Works
+
+User has a list of (sub)domains (not URIs). Antislacker checks if tab's
+url matches one of from user list & injects a chunk of JS code with a
+counter into that tab. If the counter reaches user's preferred limit,
+then matched domain is blocked until the beginning of the next day.
+
+![options page](https://raw.github.com/gromnitsky/antislacker/master/ss-options.png)
+
+## Download & Install
+
+For a latest .crx file look
+[here](http://gromnitsky.users.sourceforge.net/js/chrome/).
+
+Save the file, then open Chrome's extensions page (`Alt-F`
+`Tools->Extensions`) and drag & drop the file into the page.
 
 ## Build requirements:
 
-* jsontool in global mode.
-* make-commonjs-depend in global mode.
+* in global mode:
+  * make-commonjs-depend
+  * coffee-script 1.7.1+
+  * bower
 * GNU m4
 * xxd utility.
 * GNU make.
@@ -48,3 +68,5 @@ For the 2nd you'll need an http server. For example:
 ## License
 
 MIT.
+
+The icon is from [openclipart](http://openclipart.org/detail/192476/).

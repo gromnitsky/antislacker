@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "antislacker",
-	"description": "TODO: add a description",
+	"description": "Antiprocrastinator. Blocks domains after a time limit until the next day.",
 	"version": "syscmd(`json < package.json version | tr -d \\n')",
 	"icons": {
 		"128": "icons/128.png"
