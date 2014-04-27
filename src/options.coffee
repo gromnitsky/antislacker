@@ -1,4 +1,4 @@
-# Requires angularjs 1.2.17
+# Requires angularjs 1.2.16
 
 u = require './utils'
 
