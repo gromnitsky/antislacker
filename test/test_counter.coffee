@@ -13,6 +13,7 @@ suite 'Utils', ->
     assert.equal true, u.was_yesterday null
 
     assert.equal true, u.was_yesterday 1388500565233 # Tue Dec 31 2013
+    assert.equal true, u.was_yesterday 1398607823004 # Apr 27 2014 2014
     assert.equal false, u.was_yesterday 12998500565233 # Fri Nov 27 2381
     assert.equal false, u.was_yesterday Date.now()
 

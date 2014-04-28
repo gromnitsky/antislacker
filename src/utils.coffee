@@ -54,8 +54,14 @@ exports.was_yesterday = (num) ->
   now = new Date()
   cur_year = now.getFullYear()
   cur_month = now.getMonth()
-  cur_day = now.getDay()
+  cur_day = now.getDate()
 
 #  console.log "#{year} #{month} #{day} vs. #{cur_year} #{cur_month} #{cur_day}"
-  return true if (year < cur_year) || (month < cur_month)
+
+  return true if year < cur_year
+  return false if year > cur_year
+
+  return true if month < cur_month
+  return false if month > cur_month
+
   day < cur_day
