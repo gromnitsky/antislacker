@@ -26,7 +26,6 @@
 		"browserify": "^3.44.0",
 		"mocha": "^1.18.2",
 		"sinon": "^1.9.1",
-		"dom-storage": "^2.0.1",
-		"chai": "^1.9.1"
+		"dom-storage": "^2.0.1"
 	}
 }

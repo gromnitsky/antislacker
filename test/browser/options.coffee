@@ -1,5 +1,4 @@
-assert = require('chai').assert
-expect = require('chai').expect
+assert = require 'assert'
 
 window.chrome = {
   runtime: {
@@ -38,7 +37,7 @@ describe 'Options', ->
     localStorage.clear()
 
   it 'should create 3 table rows', ->
-    expect($scope.domains.length).to.be.equal 3
+    assert.equal 3, $scope.domains.length
 
   it 'should set the first row with "blog.example.com"', ->
     assert.deepEqual {
