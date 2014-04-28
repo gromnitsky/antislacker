@@ -3,7 +3,7 @@
 
 include ../../mk/debug.mk
 
-COFFEE := ../../node_modules/.bin/coffee
+COFFEE := ../../node_modules/.bin/coffee-inline-map
 BROWSERIFY := ../../node_modules/.bin/browserify
 
 tmp_js := $(patsubst %.coffee,%.js,$(wildcard test_*.coffee))
@@ -19,7 +19,7 @@ depend: $(tmp_js)
 -include js.mk
 
 %.js: %.coffee
-	coffee-inline-map $< -o $@
+	$(COFFEE) $< -o $@
 
 %.browserify.js: %.js
 	$(BROWSERIFY) -d $< -o $@
