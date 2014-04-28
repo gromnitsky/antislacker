@@ -2,13 +2,13 @@
 
 Chrome 33+ extension.
 
-Antiprocrastinator. Blocks domains after a time limit until the next
+An antiprocrastinator. Blocks domains after a time limit until the next
 day.
 
 ## How It Works
 
 User has a list of (sub)domains (not URIs). Antislacker checks if tab's
-url matches one of from user list & injects a chunk of JS code with a
+url matches one from the user list & injects a chunk of JS code with a
 counter into that tab. If the counter reaches user's preferred limit,
 then matched domain is blocked until the beginning of the next day.
 
@@ -63,7 +63,7 @@ For the 2nd you'll need an http server. For example:
 
 	$ python -m SimpleHTTPServer
 
-& go to http://localhost:8000/test/browser/options.html
+& go to http://0.0.0.0:8000/test/browser/test_options.html
 
 ## License
 
