@@ -12,7 +12,8 @@ out_localstorage := $(patsubst %.json,$(out)/%.localstorage,$(wildcard *.json))
 # compiled & bundled this will go to $(out)
 coffee := background.coffee \
 	content_script.coffee \
-	options.coffee
+	options.coffee \
+	message.coffee
 
 out_js := $(patsubst %.coffee,$(out)/%.js,$(coffee))
 temp_js := $(patsubst %.coffee,%.js,$(wildcard *.coffee))
