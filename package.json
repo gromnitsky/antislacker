@@ -7,12 +7,13 @@
 		"lib/content_script.js",
 		"lib/db.localstorage",
 		"lib/message.html",
+		"lib/message.js",
 		"lib/options.html",
 		"lib/options.js",
 		"manifest.json"
 	],
 	"name": "antislacker",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"license": {
 		"type": "MIT",
 		"url": "http://www.opensource.org/licenses/mit-license.php"
