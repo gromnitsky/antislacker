@@ -17,10 +17,10 @@ depend: $(tmp_js)
 -include js.mk
 
 %.tmp.js: %.coffee
-	$(COFFEE) -cp $< > $@
+	coffee-inline-map $< -o $@
 
 %.browserify.js: %.tmp.js
-	$(BROWSERIFY) $< -o $@
+	$(BROWSERIFY) -d $< -o $@
 
 .PHONY: clean
 clean:
