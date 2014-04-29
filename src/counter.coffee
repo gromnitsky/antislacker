@@ -5,12 +5,15 @@ class Counter
 
   # seconds
   @STEP = 5
-  @DAY = 60*60*24*1000
 
   @TIMEOUT: ->
     Counter.STEP*1000
 
-  constructor: (@domain) ->
+  # @domain - a string
+  #
+  # @extTmperror - an array of functions, where each of them takes 1
+  # argument & returns a boolean value. See #tmpError().
+  constructor: (@domain, @extTmperror = []) ->
     throw new Error 'domain is required' unless @domain
 
     @id = u.randstr()
@@ -32,6 +35,8 @@ class Counter
 
   tmpError: (val) ->
     return true unless val.enabled
+
+    (return true if func val) for func in @extTmperror
 
     if val.mutex
       mutex = val.mutex.split '/'

@@ -7,10 +7,13 @@ day.
 
 ## How It Works
 
-User has a list of (sub)domains (not URIs). Antislacker checks if tab's
-url matches one from the user list & injects a chunk of JS code with a
-counter into that tab. If the counter reaches user's preferred limit,
-then matched domain is blocked until the beginning of the next day.
+A user has a list of (sub)domains (not URIs). Antislacker checks if a
+tab url matches the one from the user list & injects a chunk of JS code
+(a counter) into that tab. If the counter reaches user's preferred
+limit, then the matched domain is blocked until the beginning of the
+next day.
+
+The counter tries not to count if the tab isn't active.
 
 ![options page](https://raw.github.com/gromnitsky/antislacker/master/ss-options.png)
 
