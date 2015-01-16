@@ -13,7 +13,7 @@
 		"manifest.json"
 	],
 	"name": "antislacker",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"license": {
 		"type": "MIT",
 		"url": "http://www.opensource.org/licenses/mit-license.php"

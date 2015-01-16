@@ -1,4 +1,4 @@
-# Example: http://dilbert.com/strips/comic/2014-04-27/
+# Example: http://dilbert.com/strip/2014-04-27
 
 $ = require 'jquery'
 
@@ -27,7 +27,7 @@ class Comic
 
   @url: (date) ->
     Comic.validate_date date
-    "http://dilbert.com/strips/comic/#{date}"
+    "http://dilbert.com/strip/#{date}"
 
   constructor: (selector, @date, @raw_html) ->
     Comic.validate_date @date
@@ -40,19 +40,19 @@ class Comic
     @title = null
 
   _getImage: ->
-    $(@raw_html)?.find "div#strip_enlarged_#{@date} img"
+    $(@raw_html)?.find "div.img-comic-container img"
 
   _getAttrs: ->
-    @src = "http://dilbert.com#{@_getImage()?.attr('src')}"
-    @title = @_getImage()?.attr 'title'
+    @src = @_getImage()?.attr 'src'
+    @title = @date
 
   draw: ->
     @_getAttrs()
-    unless @title
+    unless @src
       console.error "bad luck or redesign of Dilbert's site happened"
       return false
 
-    @node.html "<a href='http://dilbert.com/strips/comic/#{@date}'><img src='#{@src}' title='#{@title}'></a>"
+    @node.html "<a href='#{Comic.url @date}'><img src='#{@src}' title='#{@title}'></a>"
     true
 
 
